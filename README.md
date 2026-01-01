@@ -5,8 +5,8 @@ This is a group project where we develop the frontend and use a provided Node.js
 ## 🏗️ Project Structure
 
 ReactFood/
-├── backend/ # Node.js API (provided by professor)
-├── frontend/ # React app (we develop this)
+├── backend/ # Node.js API (provided)
+├── frontend/ # React app (we develop)
 ├── .gitignore
 └── README.md
 
