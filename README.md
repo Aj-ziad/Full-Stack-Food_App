@@ -25,16 +25,13 @@ We use **Feature Branches** → each feature is developed in its own branch → 
 | **Write clear commit messages** | Example: `feat: add cart modal component` |
 
 ## 🌿 Branch Naming Rules
-
-Create branches using this pattern:
-
-feature/meals
-feature/cart
-feature/checkout
-feature/cart-context
-feature/http-hook
-feature/ui-components
-
+Use these naming patterns:
+- `feature/meals`
+- `feature/cart`
+- `feature/checkout`
+- `feature/cart-context`
+- `feature/http-hook`
+- `feature/ui-components`
 
 ### 🔄 Example Workflow
 
