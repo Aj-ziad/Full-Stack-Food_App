@@ -2,6 +2,8 @@
 
 This is a group project where we develop the frontend and use a provided Node.js backend.
 
+
+
 🧱 Project Structure
 ReactFood/
 ├── backend/        # Node.js API (provided by professor)
