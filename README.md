@@ -55,12 +55,12 @@ git push origin feature/meals
 1️⃣ Backend Setup
 cd backend
 npm install
-node app.js      # Server runs at http://localhost:3000
+npm start       # runs at http://localhost:3000
 
 2️⃣ Frontend Setup
 cd frontend
 npm install
-npm start     # Runs at http://localhost:5173
+  # runs at http://localhost:5173
 
 3️⃣ Environment Configuration
 Create a frontend/.env file with:
