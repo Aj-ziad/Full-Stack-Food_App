@@ -1,5 +1,5 @@
 
-const API_BASE_URL = 'http;//localhost:3000/'
+const API_BASE_URL = 'http://localhost:3000/'
 
 export const sendCheckoutData = async (data)=>{
     try {
@@ -13,6 +13,7 @@ export const sendCheckoutData = async (data)=>{
         return response;
         
     } catch (error) {
-        console.error(error);
+        //console.error(error);
+        return null;
     }
 }
