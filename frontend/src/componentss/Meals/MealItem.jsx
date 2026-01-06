@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { formattedPrice } from "../../util/formatting";
 import Button from "../../components/UI/Button";
+import  {CartContext} from "../../store/CartContext"
 function MealItem({ meal }) {
-  
+  const cartCtx = useContext(CartContext)
+  function addToCartHandler(){
+    cartCtx.addItem({
+      id: meal.id,
+      title: meal.name,
+      price: Number(meal.price),
+      description: meal.description,
+    });
+  }
+  console.log("Cart Context:", cartCtx);
+
   const price= formattedPrice.format(Number(meal.price).toFixed(2))
 
   return (
@@ -40,7 +51,7 @@ function MealItem({ meal }) {
 
      
         <Button
-        textOnly onClick={""}
+        textOnly onClick={addToCartHandler}
           // className="w-1/2 py-3 rounded-lg font-semibold text-black transition"
           // style={{ backgroundColor: "#ffc304" }}
         >
