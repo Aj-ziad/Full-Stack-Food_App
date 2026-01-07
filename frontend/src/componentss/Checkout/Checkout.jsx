@@ -11,6 +11,11 @@ function Checkout({cartData}) {
 
   const successText = "Your order has been sent successfully!"
 
+  const dummyCart = [
+    {"meal1": 'test younes'},
+    {"meal2": 'tes2'},
+  ]
+
   const handleChange = (e)=>{
     const {name, value} = e.target;
     setFormData(prev => ({...prev, [name]: value}));
@@ -20,11 +25,12 @@ function Checkout({cartData}) {
     e.preventDefault();
     const newErrors = [];
 
-    setFormData(prev => ({...prev, cartData}));
-    const response = await sendCheckoutData(formData);
-
+    //setFormData(prev => ({...prev, items: dummyCart}));
+    const response = await sendCheckoutData(formData, dummyCart);
+    //console.log(response);
+    
     if (response.status !== 200) {
-      newErrors.push(response.message || "Something went wrong!");
+      newErrors.push(response.message);
       setErrors(newErrors);
       return;
     }
