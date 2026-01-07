@@ -4,6 +4,7 @@ import './App.css';
 import CartContextProvider from './store/CartContext';
 import Meals from './componentss/Meals/Meals';
 import Cart from './componentss/Cart/Cart';
+import Header from './componentss/Header/Header';
 
 import Modal from "./components/UI/Modal" 
 function App() {
@@ -13,18 +14,10 @@ function App() {
   return (
    <>
   <CartContextProvider>
-      <div className="p-4">
-        <h1 className="text-3xl text-red-600 font-bold mb-4">
-          Hhhh The best team in the entire Bootcamp
-        </h1>
-
-        <button
-          onClick={handleOpenModel}
-          className="bg-yellow-400 px-4 py-2 rounded font-bold mb-4"
-        >
-          Open Cart
-        </button>
-
+      <div className="min-h-screen bg-[#0f0f0f]">
+    
+        <Header  onOpenCart={handleOpenModel} />
+        
         <Meals />
 
         {/* Modal */}
