@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import MealItem from './MealItem';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000';
+// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
 
 function Meals() {
     const [meals, setMeals] = useState([]);
