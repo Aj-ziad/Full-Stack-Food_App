@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import {CartContext} from "../../store/CartContext"
 import CartItem from './CartItem'
-function Cart({onClose}) {
+function Cart({onClose, onCheckout}) {
   const cartCtx = useContext(CartContext)
   if(cartCtx.items.length === 0){
     return <p>your cart is empty </p>
@@ -26,11 +26,8 @@ function Cart({onClose}) {
           <button onClick={onClose} className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 transition">
             close
           </button>
-          <button className="px-4 py-2 rounded bg-yellow-400 text-white font-bold hover:bg-yellow-500 transition" onClick={() => {
-            cartCtx.clearCart() 
-            onClose()
-            }}>
-            Go to checkout or clear cart
+          <button className="px-4 py-2 rounded bg-yellow-400 text-white font-bold hover:bg-yellow-500 transition" onClick={onCheckout}>
+            Go to Checkout
           </button>
         </div>
     </div>
