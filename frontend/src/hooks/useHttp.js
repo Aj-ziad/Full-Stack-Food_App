@@ -2,8 +2,6 @@
 const API_BASE_URL = 'http://localhost:3000/'
 
 export const sendCheckoutData = async (customerData, cartData)=>{
-    console.log(customerData);
-    
     try {
         const response = await fetch(API_BASE_URL + 'orders', {
             method: 'POST',

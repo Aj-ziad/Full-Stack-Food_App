@@ -4,12 +4,12 @@ import Button from '../../components/UI/Button';
 import { sendCheckoutData } from '../../hooks/useHttp';
 import Modal from '../../components/UI/Modal';
 
-function Checkout({cartData}) {
+function Checkout({checkoutOpen, cartData}) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState([]);
-  const [isSubmiteed, setIsSubmitted] = useState(false);
 
-  const successText = "Your order has been sent successfully!"
+  const [checkoutIsOpen, setCheckoutIsOpen] = useState(checkoutOpen);
+  const [isSubmiteed, setIsSubmitted] = useState(false);
 
   const dummyCart = [
     {"meal1": 'test younes'},
@@ -25,37 +25,45 @@ function Checkout({cartData}) {
     e.preventDefault();
     const newErrors = [];
 
-    //setFormData(prev => ({...prev, items: dummyCart}));
     const response = await sendCheckoutData(formData, dummyCart);
-    //console.log(response);
-    
-    if (response.status !== 200) {
+
+    if (response.status === 400 || response.status === 500) {
       newErrors.push(response.message);
       setErrors(newErrors);
       return;
     }
 
+    setCheckoutIsOpen(false);
     setIsSubmitted(true);
   }
 
   return (
     <>
-        <div className='w-[700px] bg-neutral-100 rounded-md shadow-lg flex flex-col gap-2 p-4'>
-          <h1 className='font-bold text-2xl text-gray-700 text-center'>Checkout</h1>
-          {errors.map((err, key)=>(
-            <p className='text-red-500 text-center font-bold' key={key}>{err}</p>
-          ))}
-          <form onSubmit={handleSubmit}>
-            <Input label={'Email'} type={'email'} required={true} name={'email'} value={formData.email} onChange={handleChange} />
-            <Input label={'Full Name'} type={'text'} required={true} name={'name'} value={formData.name} onChange={handleChange} />
-            <Input label={'Street'} type={'text'} required={true} name={'street'} value={formData.street} onChange={handleChange} />
-            <Input label={'Code Postal'} type={'number'} required={true} name={'postal-code'} value={formData['postal-code']} onChange={handleChange} />
-            <Input label={'City'} type={'text'} required={true} name={'city'} value={formData.city} onChange={handleChange} />
+        <Modal isOpen={checkoutIsOpen} className='bg-neutral-100 rounded-md shadow-lg p-6' >
+          <div className='w-full flex flex-col items-center justify-center gap-2'>
+            <h1 className='font-bold text-2xl text-gray-700 text-center'>Checkout</h1>
+            {errors.map((err, key)=>(
+              <p className='text-red-500 text-center font-bold' key={key}>{err}</p>
+            ))}
+            <form onSubmit={handleSubmit} className='w-[80%]'>
+              <Input label={'Email'} type={'email'} required={true} name={'email'} value={formData.email} onChange={handleChange} />
+              <Input label={'Full Name'} type={'text'} required={true} name={'name'} value={formData.name} onChange={handleChange} />
+              <Input label={'Street'} type={'text'} required={true} name={'street'} value={formData.street} onChange={handleChange} />
+              <Input label={'Code Postal'} type={'number'} required={true} name={'postal-code'} value={formData['postal-code']} onChange={handleChange} />
+              <Input label={'City'} type={'text'} required={true} name={'city'} value={formData.city} onChange={handleChange} />
 
-            <Button className='mt-5' children={'Submit'} type={'submit'} />
-          </form>
-        </div>
-        <Modal isOpen={isSubmiteed} children={successText} />
+              <Button className='mt-5 float-end' type={'submit'} >
+                Submit
+              </Button>
+            </form>
+          </div>
+        </Modal>
+        <Modal isOpen={isSubmiteed} >
+          <div className='w-full h-full bg-white p-8'>
+            <h1 className='font-bold text-lg mb-3'>Congrats {formData.name}</h1>
+            <p>Your order has been submitted successfully!</p>
+          </div>
+        </Modal>
     </>
   )
 }

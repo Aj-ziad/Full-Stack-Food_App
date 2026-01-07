@@ -72,7 +72,7 @@ export default function Modal({ isOpen = false, onClose = () => {}, children, cl
       
       style={{ background: "rgba(0,0,0,0.5)" }}
     >
-      <div className={`bg-white/5 backdrop-blur-sm p-6 ${className}`}>
+      <div className={`backdrop-blur-sm ${className}`}>
         {children}
       </div>
     </dialog>,
