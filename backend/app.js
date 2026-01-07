@@ -26,11 +26,13 @@ app.get('/meals', async (req, res) => {
 });
 
 app.post('/orders', async (req, res) => {
+    
   try {
+    
     const orderData = req.body.order;
-
+    
     await new Promise((resolve) => setTimeout(resolve, 1000));
-
+    
     if (orderData === null || orderData.items === null || orderData.items.length === 0) {
       res.setHeader('Content-Type', 'application/json');
       return res
@@ -77,7 +79,7 @@ app.use((req, res) => {
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
-
+  
   res.setHeader('Content-Type', 'application/json');
   res.status(404).json({ message: 'Not found' });
 });

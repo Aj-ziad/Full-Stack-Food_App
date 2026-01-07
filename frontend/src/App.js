@@ -5,13 +5,13 @@ import CartContextProvider from './store/CartContext';
 import Meals from './componentss/Meals/Meals';
 import Cart from './componentss/Cart/Cart';
 
-import Modal from "./components/UI/Modal" 
 function App() {
   const [isOpenModel,setIsOpenModel] = useState(false)
   const handleOpenModel =() => setIsOpenModel(true)
   const handleCloseModel = () => setIsOpenModel(false)
   return (
    <>
+
   <CartContextProvider>
       <div className="p-4">
         <h1 className="text-3xl text-red-600 font-bold mb-4">
