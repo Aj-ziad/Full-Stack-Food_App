@@ -11,10 +11,6 @@ function Checkout({checkoutOpen, cartData}) {
   const [checkoutIsOpen, setCheckoutIsOpen] = useState(checkoutOpen);
   const [isSubmiteed, setIsSubmitted] = useState(false);
 
-  const dummyCart = [
-    {"meal1": 'test younes'},
-    {"meal2": 'tes2'},
-  ]
 
   const handleChange = (e)=>{
     const {name, value} = e.target;
@@ -25,7 +21,7 @@ function Checkout({checkoutOpen, cartData}) {
     e.preventDefault();
     const newErrors = [];
 
-    const response = await sendCheckoutData(formData, dummyCart);
+    const response = await sendCheckoutData(formData, cartData);
 
     if (response.status === 400 || response.status === 500) {
       newErrors.push(response.message);
