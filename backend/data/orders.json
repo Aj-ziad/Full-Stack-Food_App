@@ -1,4 +1,1 @@
-[{"customer":{"email":"ajdourziyad@gmail.com","name":"ziad ajdour","street":"ait melloul","postal-code":"80000","city":"agadir"}
-,"items":[{"id":"m2","title":"Margherita Pizza","price":12.99,"description":"A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust.","quantity":1},
-{"id":"m1","title":"Mac & Cheese","price":8.99,"description":"Creamy cheddar cheese mixed with perfectly cooked macaroni, topped with crispy breadcrumbs. A classic comfort food.","quantity":1}],
-"id":"175.85569570513536"}]
+[{"customer":{"email":"ziad@gmail.com","name":"ziad ajdour","street":"ait melloul","postal-code":"80000","city":"agadir"},"items":[{"id":"m2","title":"Margherita Pizza","price":12.99,"description":"A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust.","quantity":1}],"id":"6.041890856438359"}]
