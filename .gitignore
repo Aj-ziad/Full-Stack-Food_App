@@ -19,3 +19,8 @@ Thumbs.db
 *.cache
 .vscode/
 .idea/
+
+# Deployment guides (local only)
+DEPLOY_QUICK_START.md
+STRATEGY1_STEP_BY_STEP.md
+VERCEL_DEPLOYMENT_GUIDE.md

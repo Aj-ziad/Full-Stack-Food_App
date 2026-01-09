@@ -51,17 +51,47 @@ git push origin feature/meals
 
 # Then open a Pull Request on GitHub for review
 
-🚀 How to Run Locally
-1️⃣ Backend Setup
+## 🚀 How to Run Locally
+
+### 1️⃣ Backend Setup
+```bash
 cd backend
 npm install
-npm start       # runs at http://localhost:3000
+npm start       # runs at http://localhost:3001
+```
 
-2️⃣ Frontend Setup
+### 2️⃣ Frontend Setup
+```bash
 cd frontend
 npm install
-  # runs at http://localhost:5173
+npm start       # runs at http://localhost:3000
+```
 
-3️⃣ Environment Configuration
-Create a frontend/.env file with:
-VITE_BACKEND_URL=http://localhost:3000
+### 3️⃣ Environment Configuration (Optional)
+Create a `frontend/.env` file with:
+```
+REACT_APP_BACKEND_URL=http://localhost:3001
+```
+
+---
+
+## 🌐 Deployment
+
+This project supports **two deployment strategies**:
+
+### Strategy 1: All-in-One Vercel (Quick & Easy)
+- Deploy frontend + backend API routes on Vercel
+- Best for: Quick demos, portfolios
+- **Guide**: See [QUICK_START_DEPLOYMENT.md](./QUICK_START_DEPLOYMENT.md)
+
+### Strategy 2: Separate Deployments (Production Ready)
+- Frontend on Vercel
+- Backend on Railway/Render/etc.
+- Best for: Production apps with data persistence
+- **Guide**: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+
+**Quick Links**:
+- 📖 [Complete Deployment Guide](./DEPLOYMENT_GUIDE.md)
+- ⚡ [Quick Start Guide](./QUICK_START_DEPLOYMENT.md)
+- 🔐 [Environment Variables](./ENVIRONMENT_VARIABLES.md)
+- 🔧 [Backend README](./backend/README.md)

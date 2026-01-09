@@ -8,10 +8,22 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+// CORS configuration - supports both development and production
+const allowedOrigins = process.env.CORS_ORIGINS 
+  ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim())
+  : ['*']; // Default to allow all (for development)
+
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  const origin = req.headers.origin;
+  
+  // Allow request if origin is in allowed list or if '*' is allowed
+  if (allowedOrigins.includes('*') || (origin && allowedOrigins.includes(origin))) {
+    res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  }
+  
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 });
 
@@ -84,4 +96,7 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
 
-app.listen(3001);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
