@@ -30,9 +30,49 @@ function cartReducer(state,action){
             }
             return {...state,items:newTab}
         }
-        case cartActionsTypes.REMOVE_ITEM:{
-            return {...state,items:state.items.filter((item) => item.id !== action.payload)}
-        }
+        // case cartActionsTypes.REMOVE_ITEM:{
+        //     // return {...state,items:state.items.filter((item) => item.id !== action.payload)}
+        //     const itemExist = state.items.find((it) => it.id === action.payload)
+        //     if(itemExist){
+        //         return state
+        //         }
+        //     let newTab
+        //     if(itemExist.quantity ===1){
+        //         newTab = state.items.filter((item) => item.id !== action.payload)
+
+        //     }else {
+        //         newTab = state.items.map((item) => item.id === action.payload ? {...item,quantity:item.quantity -1} : item)
+        //     }
+
+        //     return {...state,items:newTab}
+        // }
+        case cartActionsTypes.REMOVE_ITEM: {
+  const itemExist = state.items.find(
+    (it) => it.id === action.payload
+  );
+
+  // If item does NOT exist → do nothing
+  if (!itemExist) {
+    return state;
+  }
+
+  let newTab;
+
+  if (itemExist.quantity === 1) {
+    newTab = state.items.filter(
+      (item) => item.id !== action.payload
+    );
+  } else {
+    newTab = state.items.map((item) =>
+      item.id === action.payload
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+  }
+
+  return { ...state, items: newTab };
+}
+
         case cartActionsTypes.CLEAR_CART:{
             return {...state,items:[]}
         }
@@ -55,6 +95,7 @@ export function CartContextProvider({children}){
     }
     function removeItem(id){
         dispatch({type:cartActionsTypes.REMOVE_ITEM,payload:id})
+        
 
     }
     function clearCart(){
