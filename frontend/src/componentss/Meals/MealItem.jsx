@@ -12,7 +12,7 @@ function MealItem({ meal }) {
       description: meal.description,
     });
   }
-  console.log("Cart Context:", cartCtx);
+  // console.log("Cart Context:", cartCtx);
 
   const price= formattedPrice.format(Number(meal.price).toFixed(2))
 

@@ -3,6 +3,9 @@ import {CartContext} from "../../store/CartContext"
 import CartItem from './CartItem'
 function Cart({onClose}) {
   const cartCtx = useContext(CartContext)
+  console.log("this is cart",cartCtx.items);
+  
+  
   if(cartCtx.items.length === 0){
     return <p>your cart is empty </p>
   }
