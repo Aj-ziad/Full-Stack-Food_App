@@ -77,7 +77,7 @@ REACT_APP_BACKEND_URL=http://localhost:3001
 
 ## 🌐 Deployment
 
-This project supports **two deployment strategies**:
+This project is configured for **Vercel deployment (Strategy 1)**:
 
 ### Strategy 1: All-in-One Vercel (Quick & Easy)
 - Deploy frontend + backend API routes on Vercel
