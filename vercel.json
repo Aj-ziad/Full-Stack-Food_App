@@ -11,7 +11,10 @@
   ],
   "functions": {
     "api/images/[...path].js": {
-      "includeFiles": "backend/public/**"
+      "includeFiles": [
+        "public/images/**",
+        "backend/public/images/**"
+      ]
     }
   }
 }
