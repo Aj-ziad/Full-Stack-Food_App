@@ -25,23 +25,19 @@ function MealItem({ meal }) {
       <div className="h-56 overflow-hidden">
         <img
         src={(() => {
-          const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
           // meal.image is already "images/mac-and-cheese.jpg"
-          // For Vercel: Use direct static file path /images/mac-and-cheese.jpg (served from root public folder)
-          // For local: http://localhost:3001/images/mac-and-cheese.jpg
+          // Check if we're running locally (development) vs production
+          const isProduction = process.env.NODE_ENV === 'production' || 
+                               (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'));
           
-          // Check if we're in production (Vercel) - baseUrl is '/api' or starts with '/api' or is a Vercel domain
-          const isVercel = baseUrl === '/api' || 
-                          baseUrl.startsWith('/api') || 
-                          baseUrl.includes('vercel.app') ||
-                          (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'));
-          
-          if (isVercel) {
-            // Vercel: Use direct static file path from root public folder
-            // meal.image is "images/mac-and-cheese.jpg", so we use /images/mac-and-cheese.jpg
+          if (isProduction) {
+            // Production (Vercel): Use direct static file path
+            // React build copies frontend/public/images/ to build/images/
+            // So /images/mac-and-cheese.jpg will work
             return `/${meal.image}`;
           } else {
-            // Local: http://localhost:3001/ + images/mac-and-cheese.jpg
+            // Local development: Use backend server
+            const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
             return `${baseUrl}/${meal.image}`;
           }
         })()}
@@ -49,6 +45,10 @@ function MealItem({ meal }) {
           className="w-full h-full object-cover"
         onError={(e) => {
           console.error('Image failed to load:', e.target.src);
+          // Fallback: try direct path if API path failed
+          if (e.target.src.includes('localhost:3001') || e.target.src.includes('/api/')) {
+            e.target.src = `/${meal.image}`;
+          }
         }}
         />
       </div>
