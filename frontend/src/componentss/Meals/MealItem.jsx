@@ -26,28 +26,18 @@ function MealItem({ meal }) {
         <img
         src={(() => {
           // meal.image is already "images/mac-and-cheese.jpg"
-          // Check if we're running locally (development) vs production
-          const isProduction = process.env.NODE_ENV === 'production' || 
-                               (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'));
-          
-          if (isProduction) {
-            // Production (Vercel): Use direct static file path
-            // React build copies frontend/public/images/ to build/images/
-            // So /images/mac-and-cheese.jpg will work
-            return `/${meal.image}`;
-          } else {
-            // Local development: Use backend server
-            const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
-            return `${baseUrl}/${meal.image}`;
-          }
+          // Always use direct static file path - React build copies frontend/public/images/ to build/images/
+          // For local dev, images should also be in public folder
+          return `/${meal.image}`;
         })()}
         alt={meal.name}
           className="w-full h-full object-cover"
         onError={(e) => {
           console.error('Image failed to load:', e.target.src);
-          // Fallback: try direct path if API path failed
-          if (e.target.src.includes('localhost:3001') || e.target.src.includes('/api/')) {
-            e.target.src = `/${meal.image}`;
+          // If direct path fails, try backend server (for local dev)
+          if (!e.target.src.includes('localhost:3001')) {
+            const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
+            e.target.src = `${baseUrl}/${meal.image}`;
           }
         }}
         />
