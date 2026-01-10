@@ -5,17 +5,9 @@
   "framework": null,
   "rewrites": [
     {
-      "source": "/((?!api|static|.*\\.(jpg|jpeg|png|gif|svg|ico|css|js|json|webp|woff|woff2|ttf|eot)).*)",
+      "source": "/((?!api|static|images|.*\\.(jpg|jpeg|png|gif|svg|ico|css|js|json|webp|woff|woff2|ttf|eot)).*)",
       "destination": "/index.html"
     }
-  ],
-  "functions": {
-    "api/images/[...path].js": {
-      "includeFiles": [
-        "public/images/**",
-        "backend/public/images/**"
-      ]
-    }
-  }
+  ]
 }
 
