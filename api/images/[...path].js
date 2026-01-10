@@ -8,9 +8,14 @@ export default async function handler(req, res) {
     return res.status(404).json({ message: 'Image path required' });
   }
 
+  // Handle both Vercel serverless and local environments
+  // In Vercel, process.cwd() points to the root of the project
+  // The path array will be like ['images', 'mac-and-cheese.jpg']
   const fullPath = path.join(process.cwd(), 'backend', 'public', ...imagePath);
   
   try {
+    // Verify file exists before reading
+    await fs.access(fullPath);
     const image = await fs.readFile(fullPath);
     const ext = path.extname(fullPath).toLowerCase();
     const contentType = {
@@ -26,7 +31,17 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(image);
   } catch (error) {
-    res.status(404).json({ message: 'Image not found' });
+    console.error('Image loading error:', {
+      requestedPath: imagePath,
+      fullPath,
+      error: error.message,
+      cwd: process.cwd()
+    });
+    res.status(404).json({ 
+      message: 'Image not found',
+      path: fullPath,
+      error: error.message 
+    });
   }
 }
 

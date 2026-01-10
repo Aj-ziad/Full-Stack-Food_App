@@ -29,9 +29,17 @@ function MealItem({ meal }) {
           // meal.image is already "images/mac-and-cheese.jpg"
           // For Vercel: /api/images/images/mac-and-cheese.jpg
           // For local: http://localhost:3001/images/mac-and-cheese.jpg
-          if (baseUrl.startsWith('/api')) {
+          
+          // Check if we're in production (Vercel) - baseUrl is '/api' or starts with '/api' or is a Vercel domain
+          const isVercel = baseUrl === '/api' || 
+                          baseUrl.startsWith('/api') || 
+                          baseUrl.includes('vercel.app') ||
+                          window.location.hostname.includes('vercel.app');
+          
+          if (isVercel) {
             // Vercel: /api/images/ + images/mac-and-cheese.jpg = /api/images/images/mac-and-cheese.jpg
-            return `${baseUrl}/images/${meal.image}`;
+            // The API route expects: /api/images/[...path] where path = ['images', 'mac-and-cheese.jpg']
+            return `/api/images/${meal.image}`;
           } else {
             // Local: http://localhost:3001/ + images/mac-and-cheese.jpg
             return `${baseUrl}/${meal.image}`;
