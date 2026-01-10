@@ -26,16 +26,22 @@ function MealItem({ meal }) {
         <img
         src={(() => {
           const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
+          // meal.image is already "images/mac-and-cheese.jpg"
           // For Vercel: /api/images/images/mac-and-cheese.jpg
           // For local: http://localhost:3001/images/mac-and-cheese.jpg
           if (baseUrl.startsWith('/api')) {
+            // Vercel: /api/images/ + images/mac-and-cheese.jpg = /api/images/images/mac-and-cheese.jpg
             return `${baseUrl}/images/${meal.image}`;
           } else {
+            // Local: http://localhost:3001/ + images/mac-and-cheese.jpg
             return `${baseUrl}/${meal.image}`;
           }
         })()}
         alt={meal.name}
           className="w-full h-full object-cover"
+        onError={(e) => {
+          console.error('Image failed to load:', e.target.src);
+        }}
         />
       </div>
 
