@@ -29,7 +29,7 @@ function MealItem({ meal }) {
           // Always use direct static file path - React build copies frontend/public/images/ to build/images/
           const imagePath = `/${meal.image}`;
           // Always log in production to debug - this will show in browser console
-          console.log('[MealItem] Loading image:', imagePath, 'for meal:', meal.name);
+          console.log('[MealItem v2.0] Loading image:', imagePath, 'for meal:', meal.name);
           return imagePath;
         })()}
         alt={meal.name}
