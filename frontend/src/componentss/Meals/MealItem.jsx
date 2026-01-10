@@ -24,7 +24,16 @@ function MealItem({ meal }) {
   
       <div className="h-56 overflow-hidden">
         <img
-        src={`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001'}/images/${meal.image}`}
+        src={(() => {
+          const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
+          // For Vercel: /api/images/images/mac-and-cheese.jpg
+          // For local: http://localhost:3001/images/mac-and-cheese.jpg
+          if (baseUrl.startsWith('/api')) {
+            return `${baseUrl}/images/${meal.image}`;
+          } else {
+            return `${baseUrl}/${meal.image}`;
+          }
+        })()}
         alt={meal.name}
           className="w-full h-full object-cover"
         />
