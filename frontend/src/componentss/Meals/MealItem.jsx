@@ -24,7 +24,7 @@ function MealItem({ meal }) {
   
       <div className="h-56 overflow-hidden">
         <img
-        src={`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001'}/${meal.image}`}
+        src={`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001'}/images/${meal.image}`}
         alt={meal.name}
           className="w-full h-full object-cover"
         />
