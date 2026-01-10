@@ -27,12 +27,9 @@ function MealItem({ meal }) {
         src={(() => {
           // meal.image is already "images/mac-and-cheese.jpg"
           // Always use direct static file path - React build copies frontend/public/images/ to build/images/
-          // For local dev, images should also be in public folder
           const imagePath = `/${meal.image}`;
-          // Debug: log the image path in development
-          if (process.env.NODE_ENV === 'development') {
-            console.log('Loading image:', imagePath, 'for meal:', meal.name);
-          }
+          // Always log in production to debug - this will show in browser console
+          console.log('[MealItem] Loading image:', imagePath, 'for meal:', meal.name);
           return imagePath;
         })()}
         alt={meal.name}
