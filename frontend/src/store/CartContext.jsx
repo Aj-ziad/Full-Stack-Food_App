@@ -51,7 +51,7 @@ function cartReducer(state,action){
     (it) => it.id === action.payload
   );
 
-  // If item does NOT exist → do nothing
+ 
   if (!itemExist) {
     return state;
   }

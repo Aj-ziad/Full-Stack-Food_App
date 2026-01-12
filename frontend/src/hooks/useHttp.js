@@ -3,7 +3,7 @@ const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001
 
 export const sendCheckoutData = async (customerData, cartData)=>{
     try {
-        // Ensure URL has proper slash
+      
         const baseUrl = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
         const response = await fetch(`${baseUrl}/orders`, {
             method: 'POST',

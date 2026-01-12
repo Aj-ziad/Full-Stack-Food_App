@@ -15,7 +15,6 @@ function Meals() {
             setError(null);
 
             try {
-                // Ensure URL has proper slash
                 const baseUrl = BACKEND_URL.endsWith('/') ? BACKEND_URL.slice(0, -1) : BACKEND_URL;
                 const response = await fetch(`${baseUrl}/meals`);
                 if (!response.ok) throw new Error("Failed to fetch meals");
