@@ -8,15 +8,15 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// CORS configuration - supports both development and production
+
 const allowedOrigins = process.env.CORS_ORIGINS 
   ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim())
-  : ['*']; // Default to allow all (for development)
+  : ['*']; 
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   
-  // Allow request if origin is in allowed list or if '*' is allowed
+
   if (allowedOrigins.includes('*') || (origin && allowedOrigins.includes(origin))) {
     res.setHeader('Access-Control-Allow-Origin', origin || '*');
   }

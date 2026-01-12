@@ -12,7 +12,7 @@ function MealItem({ meal }) {
       description: meal.description,
     });
   }
-  // console.log("Cart Context:", cartCtx);
+  
 
   const price= formattedPrice.format(Number(meal.price).toFixed(2))
 
@@ -25,10 +25,8 @@ function MealItem({ meal }) {
       <div className="h-56 overflow-hidden">
         <img
         src={(() => {
-          // meal.image is already "images/mac-and-cheese.jpg"
-          // Always use direct static file path - React build copies frontend/public/images/ to build/images/
+      
           const imagePath = `/${meal.image}`;
-          // Always log in production to debug - this will show in browser console
           console.log('[MealItem v2.0] Loading image:', imagePath, 'for meal:', meal.name);
           return imagePath;
         })()}
@@ -36,7 +34,7 @@ function MealItem({ meal }) {
           className="w-full h-full object-cover"
         onError={(e) => {
           console.error('Image failed to load:', e.target.src);
-          // If direct path fails, try backend server (for local dev)
+          
           if (!e.target.src.includes('localhost:3001')) {
             const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
             e.target.src = `${baseUrl}/${meal.image}`;
